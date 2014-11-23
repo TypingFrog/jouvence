@@ -9,10 +9,10 @@ To quote from the [Fountain web site](http://fountain.io/):
 
 > Fountain allows you to write screenplays in any text editor on any device. Because it’s just text, it’s portable and future-proof.
 
-Jouvence is a node based, javascript library to read this kind of file:
+Jouvence is a node based, javascript library to read Fountain files or stream:
 
-* it is a streaming library: Jouvence doesn't read the entire instead of reading the entire file in memory and then parse it.
-* it SAX based: Jouvence sends notification while it is parsing the content instead of providing a model of the content of Fountain document.
+* it is a streaming library: Jouvence reads the data as a stream and start the parsing as soon as possible.
+* it SAX based: Jouvence sends notification while it is parsing the content instead of providing a model of the content of Fountain document at the end of the parsing.
 
 # Installation
 
