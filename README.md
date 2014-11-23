@@ -7,7 +7,7 @@ to write screenplays.
 
 To quote from the [Fountain web site](http://fountain.io/):
 
-    Fountain allows you to write screenplays in any text editor on any device. Because it’s just text, it’s portable and future-proof.
+> Fountain allows you to write screenplays in any text editor on any device. Because it’s just text, it’s portable and future-proof.
 
 Jouvence is a node based, javascript library to read this kind of file:
 
