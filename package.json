@@ -1,0 +1,29 @@
+{
+  "name": "jouvence",
+  "version": "0.1.0",
+  "description": "Foutain parser written as a node module (javascript)",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TypingFrog/jouvence.git"
+  },
+  "author": "Pierre Carion",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TypingFrog/jouvence/issues"
+  },
+  "homepage": "https://github.com/TypingFrog/jouvence",
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "gulp": "^3.8.9",
+    "gulp-mocha": "^1.1.1",
+    "mocha": "^2.0.1",
+    "sinon": "^1.11.1"
+  },
+  "dependencies": {
+    "es6-promise": "^2.0.0"
+  }
+}
