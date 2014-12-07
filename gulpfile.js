@@ -3,7 +3,7 @@ var mocha = require('gulp-mocha');
 var fixtures2js = require("gulp-fixtures2js");
 var fs = require('fs');
 
-gulp.task('test', function() {
+gulp.task('test', ['fixtures'], function() {
   return gulp.src('test/*.test.js', {
       read: false
     })
