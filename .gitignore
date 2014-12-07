@@ -29,3 +29,5 @@ node_modules
 
 # cloud9 files
 .c9
+
+test/fixtures.js 
