@@ -7,7 +7,6 @@
     }
 
     ReadableString.prototype._read = function() {
-        console.log("[" + this._name + "]: _read");
         if (this._complete) {
             this.push(null);
         } else {
