@@ -1,4 +1,4 @@
-# Jouvence
+# Jouvence (version 0.2.0)
 
 Javascript library to parse Fountain file. (SAX based evented streaming parser).
 
