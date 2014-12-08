@@ -30,7 +30,7 @@ describe('Jouvence', function() {
             expect(parts[0].type).to.equal(".");
         });
 
-        it('should parse a line with bold', function() {
+        it('should parse a line with "*"', function() {
             var part = jouvence.__parseEmphasis("how are *you* doing ?");
             var parts = part.parts;
 
@@ -41,6 +41,69 @@ describe('Jouvence', function() {
                     text: "how are "
                 }, {
                     type: '*',
+                    parts: [{
+                        type: '.',
+                        text: 'you'
+                    }]
+                }, {
+                    type: '.',
+                    text: " doing ?"
+                }, ]
+            });
+        });
+        it('should parse a line with "**"', function() {
+            var part = jouvence.__parseEmphasis("how are **you** doing ?");
+            var parts = part.parts;
+
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "how are "
+                }, {
+                    type: '**',
+                    parts: [{
+                        type: '.',
+                        text: 'you'
+                    }]
+                }, {
+                    type: '.',
+                    text: " doing ?"
+                }, ]
+            });
+        });
+        it('should parse a line with "***"', function() {
+            var part = jouvence.__parseEmphasis("how are ***you*** doing ?");
+            var parts = part.parts;
+
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "how are "
+                }, {
+                    type: '***',
+                    parts: [{
+                        type: '.',
+                        text: 'you'
+                    }]
+                }, {
+                    type: '.',
+                    text: " doing ?"
+                }, ]
+            });
+        });
+        it('should parse a line with "_"', function() {
+            var part = jouvence.__parseEmphasis("how are _you_ doing ?");
+            var parts = part.parts;
+
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "how are "
+                }, {
+                    type: '_',
                     parts: [{
                         type: '.',
                         text: 'you'
