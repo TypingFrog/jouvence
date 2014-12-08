@@ -29,5 +29,27 @@ describe('Jouvence', function() {
             expect(parts[0].text).to.equal("how are you doing ?");
             expect(parts[0].type).to.equal(".");
         });
+
+        it('should parse a line with bold', function() {
+            var part = jouvence.__parseEmphasis("how are *you* doing ?");
+            var parts = part.parts;
+
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "how are "
+                }, {
+                    type: '*',
+                    parts: [{
+                        type: '.',
+                        text: 'you'
+                    }]
+                }, {
+                    type: '.',
+                    text: " doing ?"
+                }, ]
+            });
+        });
     });
 });
