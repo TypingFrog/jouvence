@@ -8,16 +8,16 @@ var should = chai.should();
 var expect = chai.expect;
 var util = require('util');
 
-var jouvence = require("../lib").testMode();
+var parseBlock = require("../lib/jouvence/parse.block");
 
-describe('Jouvence', function() {
+describe('parse.block', function() {
     describe('process regular lines', function() {
         it('should parse a regular line', function(done) {
             var context = {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "allo", 1);
+            var state = parseBlock(context, "allo", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("allo");
@@ -29,7 +29,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "allo / how are you?", 1);
+            var state = parseBlock(context, "allo / how are you?", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("allo / how are you?");
@@ -41,7 +41,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "allo */ how are you?", 1);
+            var state = parseBlock(context, "allo */ how are you?", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("allo */ how are you?");
@@ -53,7 +53,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "allo \\/* how are you?", 1);
+            var state = parseBlock(context, "allo \\/* how are you?", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("allo \\/* how are you?");
@@ -65,7 +65,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "allo [how] are you?", 1);
+            var state = parseBlock(context, "allo [how] are you?", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("allo [how] are you?");
@@ -77,7 +77,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "allo ]] are you?", 1);
+            var state = parseBlock(context, "allo ]] are you?", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("allo ]] are you?");
@@ -89,7 +89,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "allo \\[[ are you?", 1);
+            var state = parseBlock(context, "allo \\[[ are you?", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("allo \\[[ are you?");
@@ -103,7 +103,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "allo /* this is a comment */", 1);
+            var state = parseBlock(context, "allo /* this is a comment */", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("allo");
@@ -128,7 +128,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "/* this is a comment */ allo ", 1);
+            var state = parseBlock(context, "/* this is a comment */ allo ", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("allo");
@@ -154,7 +154,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "I am /* this is a comment */ very happy  ", 1);
+            var state = parseBlock(context, "I am /* this is a comment */ very happy  ", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("I am very happy");
@@ -180,7 +180,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "/* this is a comment */", 1);
+            var state = parseBlock(context, "/* this is a comment */", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("");
@@ -210,7 +210,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "/* this is /* a */ comment */", 1);
+            var state = parseBlock(context, "/* this is /* a */ comment */", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
             expect(context.line).to.equal("");
@@ -239,7 +239,7 @@ describe('Jouvence', function() {
                 state: 0
             };
 
-            var state = jouvence.__preprocessLine(context, "well /* this is a", 1);
+            var state = parseBlock(context, "well /* this is a", 1);
 
             expect(state).to.equal(100);
             expect(context.state).to.equal(100);
@@ -268,8 +268,8 @@ describe('Jouvence', function() {
 
             var state;
 
-            state = jouvence.__preprocessLine(context, "allo /* this is a ", 1);
-            state = jouvence.__preprocessLine(context, "comment */ ", 2);
+            state = parseBlock(context, "allo /* this is a ", 1);
+            state = parseBlock(context, "comment */ ", 2);
 
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
@@ -299,8 +299,8 @@ describe('Jouvence', function() {
 
             var state;
 
-            state = jouvence.__preprocessLine(context, "allo [[ this is a ", 1);
-            state = jouvence.__preprocessLine(context, "note ]] end", 2);
+            state = parseBlock(context, "allo [[ this is a ", 1);
+            state = parseBlock(context, "note ]] end", 2);
 
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
@@ -330,9 +330,9 @@ describe('Jouvence', function() {
 
             var state;
 
-            state = jouvence.__preprocessLine(context, "allo [[ this is a ", 1);
-            state = jouvence.__preprocessLine(context, " very long ", 2);
-            state = jouvence.__preprocessLine(context, "note ]] end", 3);
+            state = parseBlock(context, "allo [[ this is a ", 1);
+            state = parseBlock(context, " very long ", 2);
+            state = parseBlock(context, "note ]] end", 3);
 
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
@@ -365,7 +365,7 @@ describe('Jouvence', function() {
 
             var state;
 
-            state = jouvence.__preprocessLine(context, "hello, /* one */ how /* two */ are you?", 1);
+            state = parseBlock(context, "hello, /* one */ how /* two */ are you?", 1);
 
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
@@ -408,8 +408,8 @@ describe('Jouvence', function() {
 
             var state;
 
-            state = jouvence.__preprocessLine(context, "hello, /* one */ how [[ this is", 1);
-            state = jouvence.__preprocessLine(context, "a note]] are you?", 2);
+            state = parseBlock(context, "hello, /* one */ how [[ this is", 1);
+            state = parseBlock(context, "a note]] are you?", 2);
 
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
