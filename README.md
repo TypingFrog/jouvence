@@ -41,3 +41,10 @@ This command should end with something like this:
 [17:24:35] Finished 'test' after 444 ms
 ```
 
+## TODO
+
+* handle dual dialogues
+* internationalization:
+** words which can start a heading
+** other ending than "TO:" for transitions
+* blank lines between actions are actions?
