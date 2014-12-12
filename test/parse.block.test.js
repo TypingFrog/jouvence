@@ -8,7 +8,7 @@ var should = chai.should();
 var expect = chai.expect;
 var util = require('util');
 
-var parseBlock = require("../lib/jouvence/parse.block");
+var parseBlock = require("../lib/jouvence/parse.block").parseBlock;
 
 describe('parse.block', function() {
     describe('process regular lines', function() {
@@ -110,7 +110,7 @@ describe('parse.block', function() {
             expect(context.blocks).to.have.length(1);
             expect(context.blocks[0]).to.eql({
                 nature: 'comment',
-                before: 'allo',
+                before: 'allo ',
                 start: {
                     lineno: 1,
                     column: 5
@@ -157,11 +157,11 @@ describe('parse.block', function() {
             var state = parseBlock(context, "I am /* this is a comment */ very happy  ", 1);
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
-            expect(context.line).to.equal("I am very happy");
+            expect(context.line).to.equal("I am  very happy");
             expect(context.blocks).to.have.length(1);
             expect(context.blocks[0]).to.eql({
                 nature: 'comment',
-                before: 'I am',
+                before: 'I am ',
                 start: {
                     lineno: 1,
                     column: 5
@@ -247,7 +247,7 @@ describe('parse.block', function() {
             expect(context.blocks).to.have.length(1);
             expect(context.blocks[0]).to.eql({
                 nature: 'comment',
-                before: 'well',
+                before: 'well ',
                 start: {
                     lineno: 1,
                     column: 5
@@ -277,7 +277,7 @@ describe('parse.block', function() {
             expect(context.blocks).to.have.length(1);
             expect(context.blocks[0]).to.eql({
                 nature: 'comment',
-                before: 'allo',
+                before: 'allo ',
                 start: {
                     lineno: 1,
                     column: 5
@@ -304,11 +304,11 @@ describe('parse.block', function() {
 
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
-            expect(context.line).to.equal("allo end");
+            expect(context.line).to.equal("allo  end");
             expect(context.blocks).to.have.length(1);
             expect(context.blocks[0]).to.eql({
                 nature: 'note',
-                before: 'allo',
+                before: 'allo ',
                 start: {
                     lineno: 1,
                     column: 5
@@ -336,11 +336,11 @@ describe('parse.block', function() {
 
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
-            expect(context.line).to.equal("allo end");
+            expect(context.line).to.equal("allo  end");
             expect(context.blocks).to.have.length(1);
             expect(context.blocks[0]).to.eql({
                 nature: 'note',
-                before: 'allo',
+                before: 'allo ',
                 start: {
                     lineno: 1,
                     column: 5
@@ -369,11 +369,11 @@ describe('parse.block', function() {
 
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
-            expect(context.line).to.equal("hello, how are you?");
+            expect(context.line).to.equal("hello,  how  are you?");
             expect(context.blocks).to.have.length(2);
             expect(context.blocks[0]).to.eql({
                 nature: 'comment',
-                before: 'hello,',
+                before: 'hello, ',
                 start: {
                     lineno: 1,
                     column: 7
@@ -386,7 +386,7 @@ describe('parse.block', function() {
             });
             expect(context.blocks[1]).to.eql({
                 nature: 'comment',
-                before: 'how',
+                before: ' how ',
                 start: {
                     lineno: 1,
                     column: 21
@@ -413,11 +413,11 @@ describe('parse.block', function() {
 
             expect(state).to.equal(0);
             expect(context.state).to.equal(0);
-            expect(context.line).to.equal("hello, how are you?");
+            expect(context.line).to.equal("hello,  how  are you?");
             expect(context.blocks).to.have.length(2);
             expect(context.blocks[0]).to.eql({
                 nature: 'comment',
-                before: 'hello,',
+                before: 'hello, ',
                 start: {
                     lineno: 1,
                     column: 7
@@ -430,7 +430,7 @@ describe('parse.block', function() {
             });
             expect(context.blocks[1]).to.eql({
                 nature: 'note',
-                before: 'how',
+                before: ' how ',
                 start: {
                     lineno: 1,
                     column: 21
