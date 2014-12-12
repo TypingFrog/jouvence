@@ -8,12 +8,12 @@ var should = chai.should();
 var expect = chai.expect;
 var util = require('util');
 
-var jouvence = require("../lib").testMode();
+var parseEmphasis = require("../lib/jouvence/parse.emphasis");
 
-describe('Jouvence - emphasis parsing', function() {
+describe('parse emphasis', function() {
     describe('simple string parsing', function() {
         it('should parse a regular line (1)', function() {
-            var part = jouvence.__parseEmphasis("allo");
+            var part = parseEmphasis("allo");
             var parts = part.parts;
             expect(parts).to.be.an('array');
             expect(parts.length).to.equal(1);
@@ -22,7 +22,7 @@ describe('Jouvence - emphasis parsing', function() {
         });
 
         it('should parse a regular line (2)', function() {
-            var part = jouvence.__parseEmphasis("how are you doing ?");
+            var part = parseEmphasis("how are you doing ?");
             var parts = part.parts;
             expect(parts).to.be.an('array');
             expect(parts.length).to.equal(1);
@@ -31,7 +31,7 @@ describe('Jouvence - emphasis parsing', function() {
         });
 
         it('should parse a line with "*"', function() {
-            var part = jouvence.__parseEmphasis("how are *you* doing ?");
+            var part = parseEmphasis("how are *you* doing ?");
 
             expect(part).to.eql({
                 type: '.',
@@ -51,7 +51,7 @@ describe('Jouvence - emphasis parsing', function() {
             });
         });
         it('should parse a line with "**"', function() {
-            var part = jouvence.__parseEmphasis("how are **you** doing ?");
+            var part = parseEmphasis("how are **you** doing ?");
 
             expect(part).to.eql({
                 type: '.',
@@ -71,7 +71,7 @@ describe('Jouvence - emphasis parsing', function() {
             });
         });
         it('should parse a line with "***"', function() {
-            var part = jouvence.__parseEmphasis("how are ***you*** doing ?");
+            var part = parseEmphasis("how are ***you*** doing ?");
 
             expect(part).to.eql({
                 type: '.',
@@ -91,7 +91,7 @@ describe('Jouvence - emphasis parsing', function() {
             });
         });
         it('should parse a line with "_"', function() {
-            var part = jouvence.__parseEmphasis("how are _you_ doing ?");
+            var part = parseEmphasis("how are _you_ doing ?");
 
             expect(part).to.eql({
                 type: '.',
@@ -114,7 +114,7 @@ describe('Jouvence - emphasis parsing', function() {
 
     describe("embedded parsing", function() {
         it("should parse emphasis inside emphasis", function() {
-            var part = jouvence.__parseEmphasis("how *are _you_ doing* ?");
+            var part = parseEmphasis("how *are _you_ doing* ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -142,7 +142,7 @@ describe('Jouvence - emphasis parsing', function() {
             });
         });
         it("should parse 2 non embedded emphasis", function() {
-            var part = jouvence.__parseEmphasis("how *are* _you_ doing ?");
+            var part = parseEmphasis("how *are* _you_ doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -172,7 +172,7 @@ describe('Jouvence - emphasis parsing', function() {
     });
     describe("incomplete emphasis", function() {
         it("should parse non closed emphasis (1)", function() {
-            var part = jouvence.__parseEmphasis("how *are you doing ?");
+            var part = parseEmphasis("how *are you doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -182,7 +182,7 @@ describe('Jouvence - emphasis parsing', function() {
             });
         });
         it("should parse non closed emphasis (2)", function() {
-            var part = jouvence.__parseEmphasis("how **are you doing ?");
+            var part = parseEmphasis("how **are you doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -192,7 +192,7 @@ describe('Jouvence - emphasis parsing', function() {
             });
         });
         it("should parse non closed emphasis (3)", function() {
-            var part = jouvence.__parseEmphasis("how **are you_ doing ?");
+            var part = parseEmphasis("how **are you_ doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -204,7 +204,7 @@ describe('Jouvence - emphasis parsing', function() {
     });
     describe("escaped character", function() {
         it("should process escaped character (1)", function() {
-            var part = jouvence.__parseEmphasis("how \\*are you doing ?");
+            var part = parseEmphasis("how \\*are you doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -215,7 +215,7 @@ describe('Jouvence - emphasis parsing', function() {
         });
 
         it("should process escaped character (2)", function() {
-            var part = jouvence.__parseEmphasis("how \\*are* you doing ?");
+            var part = parseEmphasis("how \\*are* you doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -226,7 +226,7 @@ describe('Jouvence - emphasis parsing', function() {
         });
 
         it("should process escaped character (3)", function() {
-            var part = jouvence.__parseEmphasis("how *are \\*you* doing ?");
+            var part = parseEmphasis("how *are \\*you* doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -246,7 +246,7 @@ describe('Jouvence - emphasis parsing', function() {
         });
 
         it("should process fountain.io escape example", function() {
-            var part = jouvence.__parseEmphasis("Steel enters the code on the keypad: **\\*9765\\***");
+            var part = parseEmphasis("Steel enters the code on the keypad: **\\*9765\\***");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
