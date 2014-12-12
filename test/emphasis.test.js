@@ -171,7 +171,7 @@ describe('Jouvence - emphasis parsing', function() {
         });
     });
     describe("incomplete emphasis", function() {
-        it("should parse non closed emphasis", function() {
+        it("should parse non closed emphasis (1)", function() {
             var part = jouvence.__parseEmphasis("how *are you doing ?");
             expect(part).to.eql({
                 type: '.',
@@ -180,7 +180,69 @@ describe('Jouvence - emphasis parsing', function() {
                     text: "how *are you doing ?"
                 }]
             });
+        });
+        it("should parse non closed emphasis (2)", function() {
+            var part = jouvence.__parseEmphasis("how **are you doing ?");
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "how **are you doing ?"
+                }]
+            });
+        });
+        it("should parse non closed emphasis (3)", function() {
+            var part = jouvence.__parseEmphasis("how **are you_ doing ?");
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "how **are you_ doing ?"
+                }]
+            });
+        });
+    });
+    describe("escaped character", function() {
+        it("should process escaped character (1)", function() {
+            var part = jouvence.__parseEmphasis("how \\*are you doing ?");
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "how *are you doing ?"
+                }]
+            });
+        });
 
+        it("should process escaped character (2)", function() {
+            var part = jouvence.__parseEmphasis("how \\*are* you doing ?");
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "how *are* you doing ?"
+                }]
+            });
+        });
+
+        it("should process escaped character (3)", function() {
+            var part = jouvence.__parseEmphasis("how *are \\*you* doing ?");
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "how "
+                }, {
+                    type: '*',
+                    parts: [{
+                        type: '.',
+                        text: 'are *you'
+                    }]
+                }, {
+                    type: '.',
+                    text: " doing ?"
+                }, ]
+            });
         });
     });
 });
