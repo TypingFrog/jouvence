@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+
+var argv = require('minimist')(process.argv.slice(2));
+
+function usage(message, err) {
+    if (message) {
+        console.log(message)
+    }
+    if (err) {
+        console.log("ERROR:\n", err);
+        if (err.stack) {
+            console.log(err.stack);
+        }
+    }
+
+    console.log("\n");
+    console.log("Usage: bin/jouvence --input <jouvence file> --output <result file> --config <json configuration file>");
+    process.exit(1);
+}
+
+var inputFile = argv["input"] || usage();
+var outputFile = argv["output"] || usage();
+var configFile = argv["config"] || usage();
+
+
+var readStream = fs.createReadStream(inputFile, {
+    encoding: 'utf8'
+});
+
+var writeStream = fs.createWriteStream(outputFile, {
+    encoding: 'utf8'
+});
+
+fs.readFile(configFile, 'utf8', function(err, data) {
+    if (err) {
+        usage("Can't read json file:" + configFile, err);
+    }
+
+    try {
+        var config = JSON.parse(data);
+        
+        require("../lib").convert(readStream, writeStream, config).then(function() {
+            console.log("Done!")
+        }).catch(function(err) {
+            console.log("Error processing file:",err);
+            console.log(err.stack);
+        });
+
+    }
+    catch (err) {
+        usage("Can't parse json file:" + configFile, err);
+    }
+});
