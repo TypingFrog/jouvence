@@ -7,7 +7,7 @@ var sinon = require('sinon');
 var fixtures = require("./fixtures");
 chai.should();
 
-var jouvence = require("../lib");
+var jouvence = require("../lib").jouvence;
 
 describe('Jouvence', function() {
     describe('files with no content', function() {
