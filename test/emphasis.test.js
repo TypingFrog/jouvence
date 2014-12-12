@@ -244,5 +244,22 @@ describe('Jouvence - emphasis parsing', function() {
                 }, ]
             });
         });
+
+        it("should process fountain.io escape example", function() {
+            var part = jouvence.__parseEmphasis("Steel enters the code on the keypad: **\\*9765\\***");
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "Steel enters the code on the keypad: "
+                }, {
+                    type: '**',
+                    parts: [{
+                        type: '.',
+                        text: '*9765*'
+                    }]
+                }]
+            });
+        });
     });
 });
