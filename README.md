@@ -45,6 +45,6 @@ This command should end with something like this:
 
 * handle dual dialogues
 * internationalization:
-** words which can start a heading
-** other ending than "TO:" for transitions
+  * words which can start a heading
+  *  other ending than "TO:" for transitions
 * blank lines between actions are actions?
