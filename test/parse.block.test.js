@@ -9,6 +9,7 @@ var expect = chai.expect;
 var util = require('util');
 
 var parseBlock = require("../lib/jouvence/parse.block").parseBlock;
+var extractBlocks = require("../lib/jouvence/parse.block").extractBlocks;
 
 describe('parse.block', function() {
     describe('process regular lines', function() {
@@ -435,7 +436,7 @@ describe('parse.block', function() {
                     lineno: 1,
                     column: 21
                 },
-                content: ['this is','a note'],
+                content: ['this is', 'a note'],
                 end: {
                     lineno: 2,
                     column: 7
@@ -446,5 +447,102 @@ describe('parse.block', function() {
 
         });
     });
+
+    describe("extractBlocks", function() {
+        it("should extract blocks (1)", function() {
+            var context = {
+                state: 0
+            };
+
+            var state = parseBlock(context, "allo", 1);
+            var blocks = extractBlocks(context.blocks);
+            expect(blocks).to.be.empty;
+        });
+
+        it("should extract blocks (2)", function() {
+            var context = {
+                state: 0
+            };
+
+            var state = parseBlock(context, "how are you /* really */doing?", 1);
+            var blocks = extractBlocks(context.blocks);
+            expect(blocks).to.eql([{
+                nature: "comment",
+                position: 12,
+                content: ["really"]
+            }]);
+        });
+
+        it("should extract blocks (2)", function() {
+            var context = {
+                state: 0
+            };
+            var state;
+
+            state = parseBlock(context, "hello, /* one */ how [[ this is", 1);
+            state = parseBlock(context, "a note]] are you?", 2);
+            var blocks = extractBlocks(context.blocks);
+            
+            expect(blocks).to.eql([{
+                nature: "comment",
+                position: 7,
+                content: ["one"]
+            },{
+                nature: "note",
+                position: 12,
+                content: ["this is","a note"]
+            }]);
+
+        });
+
+        it("should extract blocks (3)", function() {
+            var context = {
+                state: 0
+            };
+            var state;
+
+            state = parseBlock(context, "hello, /* one */ how [[ this is", 1);
+            state = parseBlock(context, "a very long", 2);
+            state = parseBlock(context, "note]] are you?", 3);
+            var blocks = extractBlocks(context.blocks);
+            
+            expect(blocks).to.eql([{
+                nature: "comment",
+                position: 7,
+                content: ["one"]
+            },{
+                nature: "note",
+                position: 12,
+                content: ["this is","a very long" , "note"]
+            }]);
+
+        });
+
+        it("should extract blocks (4)", function() {
+            var context = {
+                state: 0
+            };
+            var state;
+
+            state = parseBlock(context, "hello, /* one */ how [[ this is", 1);
+            state = parseBlock(context, "a very long", 2);
+            state = parseBlock(context, "note]] are /* I don't really care*/you?", 3);
+            var blocks = extractBlocks(context.blocks);
+            
+            expect(blocks).to.eql([{
+                nature: "comment",
+                position: 7,
+                content: ["one"]
+            },{
+                nature: "note",
+                position: 12,
+                content: ["this is","a very long" , "note"]
+            },{
+                nature: "comment",
+                position: 17,
+                content: ["I don't really care"]
+            }]);
+
+        });    });
 
 })
