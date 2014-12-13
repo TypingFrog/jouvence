@@ -1,3 +1,17 @@
 {
-	"message": "hello"
+    "styles": {
+        "document": "scenario",
+        "heading" : "scenario_heading",
+        "action"  : "scenario_action",
+        "parenthetical" : "scenario_parenthetical",
+        "character" : "scenario_character",
+        "dialogue" : "scenario_dialogue",
+        "transition" : "scenario_transition"
+    },
+    
+    "options" : {
+        "alignment" : {
+            "centered" : "centered"
+        }
+    }
 }
