@@ -35,10 +35,8 @@ Then you can test that everything is ready to go with:
 This command should end with something like this:
 
 ```bash
-  30 passing (321ms)
+  50 passing (136ms)
   1 pending
-
-[17:24:35] Finished 'test' after 444 ms
 ```
 
 ## TODO
