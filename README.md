@@ -1,4 +1,4 @@
-# Jouvence (version 0.2.0)
+# Jouvence (version 0.3)
 
 Javascript library to parse Fountain file. (SAX based evented streaming parser).
 
@@ -35,9 +35,14 @@ Then you can test that everything is ready to go with:
 This command should end with something like this:
 
 ```bash
-  30 passing (321ms)
+  50 passing (136ms)
   1 pending
-
-[17:24:35] Finished 'test' after 444 ms
 ```
 
+## TODO
+
+* handle dual dialogues
+* internationalization:
+  * words which can start a heading
+  *  other ending than "TO:" for transitions
+* blank lines between actions are actions?

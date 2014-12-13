@@ -7,7 +7,7 @@ var sinon = require('sinon');
 var fixtures = require("./fixtures");
 chai.should();
 
-var jouvence = require("../lib");
+var jouvence = require("../lib").jouvence;
 
 describe('Jouvence', function() {
     describe('files with no content', function() {
@@ -222,7 +222,7 @@ describe('Jouvence', function() {
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("sceneHeading").once().withArgs("INT. TRAILER HOME - DAY");
-            mock.expects("action").once().withArgs("This is the home of THE BOY BAND, AKA DAN and JACK . They too are drinking beer, and counting the take from their last smash-and-grab.  Money, drugs, and ridiculous props are strewn about the table.");
+            mock.expects("action").once().withArgs("This is the home of THE BOY BAND, AKA DAN and JACK. They too are drinking beer, and counting the take from their last smash-and-grab.  Money, drugs, and ridiculous props are strewn about the table.");
             mock.expects("character").once().withArgs("JACK");
             mock.expects("parenthetical").once().withArgs("in Vietnamese, subtitled");
             mock.expects("dialogue").once().withArgs("Did you know Brick and Steel are retired?");

@@ -4,7 +4,7 @@
   "description": "Foutain parser written as a node module (javascript)",
   "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R list -b test/*.test.js"    
+    "test": "./node_modules/.bin/mocha -R list -b test/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -37,8 +37,9 @@
       "ipad/6",
       "android-browser/latest"
     ]
-  },  
+  },
   "dependencies": {
-    "es6-promise": "^2.0.0"
+    "es6-promise": "^2.0.0",
+    "minimist": "^1.1.0"
   }
 }
