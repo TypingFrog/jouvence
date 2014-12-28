@@ -2,6 +2,9 @@ var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var fixtures2js = require("gulp-fixtures2js");
 var fs = require('fs');
+var browserify = require('browserify');
+var transform = require('vinyl-transform');
+var rename = require('gulp-rename');
 
 gulp.task('test', ['fixtures'], function() {
   return gulp.src('test/*.test.js', {
@@ -34,5 +37,20 @@ gulp.task("fixtures", function() {
 
   });
 });
+
+gulp.task('browserify', function() {
+  var browserified = transform(function(filename) {
+    var b = browserify({});
+    b.require(filename,{expose: "jouvence"});
+    // var b = browserify(filename);
+    return b.bundle();
+  });
+  return gulp.src(['lib/index.js'])
+    .pipe(browserified)
+    .pipe(rename('jouvence.js'))
+    .pipe(gulp.dest('./build'));
+});
+
+
 
 gulp.task('default', ['test']);
