@@ -19,10 +19,12 @@
   "devDependencies": {
     "browserify": "^8.0.2",
     "chai": "^1.9.2",
+    "es6-promise": "^2.0.1",
     "gulp": "^3.8.9",
     "gulp-fixtures2js": "0.0.1",
     "gulp-mocha": "^1.1.1",
     "gulp-rename": "^1.2.0",
+    "minimist": "^1.1.0",
     "mocha": "^2.0.1",
     "sinon": "^1.11.1",
     "vinyl-transform": "^1.0.0"
@@ -41,8 +43,5 @@
       "android-browser/latest"
     ]
   },
-  "dependencies": {
-    "es6-promise": "^2.0.0",
-    "minimist": "^1.1.0"
-  }
+  "dependencies": {}
 }

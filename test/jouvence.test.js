@@ -8,12 +8,12 @@ var fixtures = require("./fixtures");
 chai.should();
 
 var jouvence = require("../lib").jouvence;
+var notif = require("../lib").jouvenceNotification;
 
 describe('Jouvence', function() {
     describe('files with no content', function() {
         it('should read an empty file', function(done) {
             var r = fixtures.readStream('t01.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("titlePage").never();
@@ -28,7 +28,6 @@ describe('Jouvence', function() {
         });
         it('should read a document with blank lines', function(done) {
             var r = fixtures.readStream('t02.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("titlePage").never();
@@ -48,7 +47,6 @@ describe('Jouvence', function() {
 //            var r = fs.createReadStream(path.join(__dirname, 'fixtures/t10.fountain'));
             var r = fixtures.readStream('t10.fountain');
 
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             var tpExpecation = mock.expects("titlePage").once().withArgs({
@@ -65,7 +63,6 @@ describe('Jouvence', function() {
         });
         it("should read a simple title page (2)", function(done) {
             var r = fixtures.readStream('t11.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             var tpExpecation = mock.expects("titlePage").once().withArgs({
@@ -83,7 +80,6 @@ describe('Jouvence', function() {
         });
         it("should read a simple title page (3)", function(done) {
             var r = fixtures.readStream('t12.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             var tpExpecation = mock.expects("titlePage").once().withArgs({
@@ -101,7 +97,6 @@ describe('Jouvence', function() {
         });
         it("should read a simple title page (4)", function(done) {
             var r = fixtures.readStream('t13.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("titlePage").once().withArgs({
@@ -123,7 +118,6 @@ describe('Jouvence', function() {
     describe('scene heading parsing', function() {
         it("should read headings", function(done) {
             var r = fixtures.readStream('t15.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("sceneHeading").once().withArgs("EXT. BRICK'S POOL - DAY");
@@ -142,7 +136,6 @@ describe('Jouvence', function() {
     describe('character parsing', function() {
         it("should read character names", function(done) {
             var r = fixtures.readStream('t20.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("character").once().withArgs("STEEL");
@@ -172,7 +165,6 @@ describe('Jouvence', function() {
     describe("section parsing", function() {
         it("should parse sections", function(done) {
             var r = fixtures.readStream('t25.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("section").once().withArgs("Act", 1);
@@ -195,7 +187,6 @@ describe('Jouvence', function() {
     describe("synopsis parsing", function() {
         it("should parse synopses", function(done) {
             var r = fixtures.readStream('t30.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("section").once().withArgs("ACT I", 1);
@@ -218,7 +209,6 @@ describe('Jouvence', function() {
     describe("note parsing", function() {
         it("should parse notes", function(done) {
             var r = fixtures.readStream('t40.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("sceneHeading").once().withArgs("INT. TRAILER HOME - DAY");
@@ -239,7 +229,6 @@ describe('Jouvence', function() {
         });
         it("should parse comments", function(done) {
             var r = fixtures.readStream('t45.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("character").once().withArgs("COGNITO");
@@ -264,7 +253,6 @@ describe('Jouvence', function() {
     describe.skip("complete fountain file", function() {
         it('should should read a file', function(done) {
             var r = fixtures.readStream('BrickAndSteel.fountain');
-            var notif = jouvence.dummyNotification();
             var mock = sinon.mock.create(notif);
             mock.expects("startOfDocument").once();
             mock.expects("titlePage").once();
