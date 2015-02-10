@@ -1,4 +1,4 @@
-# Jouvence (version 0.3)
+# Jouvence (version 0.5)
 
 Javascript library to parse Fountain file. (SAX based evented streaming parser).
 
@@ -44,5 +44,5 @@ This command should end with something like this:
 * handle dual dialogues
 * internationalization:
   * words which can start a heading
-  *  other ending than "TO:" for transitions
+  * other ending than "TO:" for transitions
 * blank lines between actions are actions?
