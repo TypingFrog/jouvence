@@ -10,7 +10,7 @@ var util = require('util');
 
 var parseEmphasis = require("../lib/jouvence/parse.emphasis");
 
-describe('parse emphasis', function() {
+describe.only('parse emphasis', function() {
     describe('simple string parsing', function() {
         it('should parse a regular line (1)', function() {
             var part = parseEmphasis("allo");
@@ -258,6 +258,68 @@ describe('parse emphasis', function() {
                         type: '.',
                         text: '*9765*'
                     }]
+                }]
+            });
+        });
+    });
+    
+    describe('edge cases', function(){
+        it ("'should parse edge cases (1)", function(){
+               var part = parseEmphasis("word1 ***word2* word3");
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "word1 **"
+                }, {
+                    type: '*',
+                    parts: [{
+                        type: '.',
+                        text: 'word2'
+                    }]
+                },{
+                    type: '.',
+                    text: " word3"
+                }]
+            });
+        });
+        
+        it ("'should parse edge cases (2)", function(){
+               var part = parseEmphasis("word1 ***word2** word3");
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "word1 *"
+                }, {
+                    type: '**',
+                    parts: [{
+                        type: '.',
+                        text: 'word2'
+                    }]
+                },{
+                    type: '.',
+                    text: " word3"
+                }]
+            });
+        });
+        
+        it ("'should parse edge cases (3)", function(){
+               var part = parseEmphasis("word1 *word2** word3");
+            expect(part).to.eql({
+                type: '.',
+                parts: [{
+                    type: '.',
+                    text: "word1 "
+                }, {
+                    type: '*',
+                    parts: [{
+                        type: '.',
+                        text: 'word2'
+                    }]
+                },{
+                    type: '.',
+                    text: "* word3"
                 }]
             });
         });
