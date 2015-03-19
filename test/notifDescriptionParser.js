@@ -6,11 +6,13 @@
   var _ = require('lodash');
 
   var NotifDescriptionParser = (function() {
-    var lines = [];
-    var ixLine = 0;
-    var errors = [];
 
     function NotifDescriptionParser(file, done) {
+      this.lines = [];
+      this.ixLine = 0;
+      this.errors = [];
+      this.fileName = file;
+
       var self = this;
       var filePath = path.join(__dirname, 'fixtures', file);
 
@@ -22,7 +24,7 @@
       rl.on('line', function(line) {
         line = line.trim();
         if ((line.length > 0) && (line.charAt(0) !== '#')) {
-          lines.push(line);
+          self.lines.push(line);
         }
       });
 
@@ -31,48 +33,15 @@
       });
     }
 
-    function addError(error) {
-      errors.push(error);
-    }
 
-    function check(notifName, value, extra) {
-      value = value || "";
-      extra = extra || {};
-      if (ixLine >= lines.length) {
-        addError("Overflow error for:" + notifName);
-        return false;
-      }
-      var line = lines[ixLine];
-      ixLine++;
-      var items = splitDescription(line);
-      var expectedNotifName = items[0];
-      if (expectedNotifName !== notifName) {
-        addError("wrong notif at line:" + ixLine + ": (" + notifName + ") vs (" + expectedNotifName + ")");
-        return false;
-      }
-      var expectedValue = items[1] || "";
-      if (expectedValue !== value) {
-        addError("wrong value at line:" + ixLine + ": (" + value + ") vs (" + expectedValue + ")");
-        return false;
-      }
-      var expectedExtraString = items[2] || "{}";
-      var expectedExtra = JSON.parse(expectedExtraString);
-      
-      if (! _.isEqual(extra, expectedExtra)) {
-        addError("wrong extra at line:" + ixLine + ": (" + JSON.stringify(extra) + ") vs (" + expectedExtraString + ")");
-        return false;
-      }
 
-      return true;
-    }
-    
     function splitDescription(description) {
       var state = 0;
       var result = [];
       var temp = "";
-      for(var i = 0; i < description.length; i++) {
+      for (var i = 0; i < description.length; i++) {
         var c = description.charAt(i);
-        
+
         if (c === ':') {
           result.push(temp);
           temp = "";
@@ -81,7 +50,8 @@
             result.push(description.substring(i + 1));
             return result;
           }
-        } else {
+        }
+        else {
           temp += c;
         }
       }
@@ -92,61 +62,100 @@
 
     NotifDescriptionParser.prototype = {
       verify: function() {
-        errors.forEach(function(error) {
+        if (this.errors.length > 0) {
+          console.log("Errors for:" + this.fileName);
+        }
+        this.errors.forEach(function(error) {
           console.log(error);
         });
-        return errors.length === 0;
+        return this.errors.length === 0;
+      },
+
+      addError: function(error) {
+        this.errors.push(error);
+      },
+
+      check: function(notifName, value, extra) {
+        value = value || "";
+        extra = extra || {};
+        if (this.ixLine >= this.lines.length) {
+          this.addError("Overflow error for:" + notifName);
+          return false;
+        }
+        var line = this.lines[this.ixLine];
+        this.ixLine++;
+        var items = splitDescription(line);
+        var expectedNotifName = items[0];
+        if (expectedNotifName !== notifName) {
+          this.addError("wrong notif at line:" + this.ixLine + ": (" + notifName + ") vs (" + expectedNotifName + ")");
+          return false;
+        }
+        var expectedValue = items[1] || "";
+        if (expectedValue !== value) {
+          this.addError("wrong value at line:" + this.ixLine + ": (" + value + ") vs (" + expectedValue + ")");
+          return false;
+        }
+        var expectedExtraString = items[2] || "{}";
+        var expectedExtra = JSON.parse(expectedExtraString);
+
+        if (!_.isEqual(extra, expectedExtra)) {
+          this.addError("wrong extra at line:" + this.ixLine + ": (" + JSON.stringify(extra) + ") vs (" + expectedExtraString + ")");
+          return false;
+        }
+
+        return true;
       },
 
       getNotif: function() {
+        var self = this;
         return {
           startOfDocument: function() {
-            check("startOfDocument");
+            self.check("startOfDocument");
           },
           titlePage: function(metaInformation) {
-            check("titlePage", "", metaInformation);
+            self.check("titlePage", "", metaInformation);
           },
           sceneHeading: function(sceneHeading, extra) {
-            check("sceneHeading", sceneHeading, extra);
+            self.check("sceneHeading", sceneHeading, extra);
           },
           action: function(action, blocks, options) {
-            check("action", action, options, blocks);
+            self.check("action", action, options, blocks);
           },
           pageBreak: function() {
-            check("pageBreak");
+            self.check("pageBreak");
           },
           dualDialogueStart: function() {
-            check("dualDialogueStart");
+            self.check("dualDialogueStart");
           },
           dualDialogueEnd: function() {
-            check("dualDialogueEnd");
+            self.check("dualDialogueEnd");
           },
           dialogueStart: function() {
-            check("dialogueStart");
+            self.check("dialogueStart");
           },
           dialogueEnd: function() {
-            check("dialogueEnd");
+            self.check("dialogueEnd");
           },
           character: function(character, option) {
-            check("character", character, option);
+            self.check("character", character, option);
           },
           parenthetical: function(parenthetical) {
-            check("parenthetical", parenthetical);
+            self.check("parenthetical", parenthetical);
           },
           dialogue: function(dialogue) {
-            check("dialogue", dialogue);
+            self.check("dialogue", dialogue);
           },
           transition: function(transition) {
-            check("transition", transition);
+            self.check("transition", transition);
           },
           section: function(section, level, extra) {
-            check("section_" + level, section, extra);
+            self.check("section_" + level, section, extra);
           },
           synopsis: function(synopsis) {
-            check("synopsis", synopsis);
+            self.check("synopsis", synopsis);
           },
           endOfDocument: function() {
-            check("endOfDocument");
+            self.check("endOfDocument");
           }
         };
 

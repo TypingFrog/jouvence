@@ -48,7 +48,7 @@ This command should end with something like this:
 * blank lines between actions are actions?
 * handle blocks (note and comments in every piece of the screenplay (only actions for now).
 * handle 2 spaces on a line to handle white lines in a dialogue
-* 
+* scene number in scene heading
 
 ## Changelog
 
