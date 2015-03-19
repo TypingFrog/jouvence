@@ -1,6 +1,8 @@
 (function() {
     "use strict";
-
+    var fs = require('fs');
+    var path = require('path');
+    
     var Readable = require('stream').Readable;
     var util = require('util');
     util.inherits(ReadableString, Readable);
@@ -13,7 +15,9 @@
     "t01.fountain": "",
     "t02.fountain": "\n\n",
     "t10.fountain": "Title: the title",
+    "t10.notif": "startOfDocument\ntitlePage::{ \"Title\": [\"the title\"] }\nendOfDocument\n",
     "t11.fountain": "Title: the title\nAnother: line 1\n   line 2\n   line 3\n",
+    "t11.notif": "startOfDocument\ntitlePage::{ \"Title\": [\"the title\"], \"Another\" : [\"line 1\" , \"line 2\" , \"line 3\"] }\nendOfDocument\n",
     "t12.fountain": "Title: \n   the title\nAnother: line 1\n   line 2\n   line 3",
     "t13.fountain": "Title: \n   the title\nEmpty:\nYet Another: line 1\n   line 2\n   line 3\n\n",
     "t15.fountain": "EXT. BRICK'S POOL - DAY\n\n.SNIPER SCOPE POV\n\n",
@@ -48,8 +52,8 @@
         readStream: function(name) {
             var text = fixtures[name];
             if (typeof text === 'undefined') {
-                console.log("-- no fixtures with name:" + name);
-                return null;
+                console.log("-- no static fixtures with name:" + name);
+                return fs.createReadStream(path.join(__dirname, 'fixtures',name));
             }
             return new ReadableString(text, name);
         }

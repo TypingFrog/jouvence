@@ -46,3 +46,10 @@ This command should end with something like this:
   * words which can start a heading
   * other ending than "TO:" for transitions
 * blank lines between actions are actions?
+* handle blocks (note and comments in every piece of the screenplay (only actions for now).
+* handle 2 spaces on a line to handle white lines in a dialogue
+* 
+
+## Changelog
+
+* we creat a dialogueStart/End notification to wrap dialogue elements

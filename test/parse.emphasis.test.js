@@ -10,7 +10,7 @@ var util = require('util');
 
 var parseEmphasis = require("../lib/jouvence/parse.emphasis");
 
-describe.only('parse emphasis', function() {
+describe('parse emphasis', function() {
     describe('simple string parsing', function() {
         it('should parse a regular line (1)', function() {
             var part = parseEmphasis("allo");
