@@ -14,19 +14,21 @@ var notif = require("../lib").jouvenceNotification;
 
 describe.only('fixtures', function() {
     describe('parsing files', function() {
-        it('should process file t10.fountain', function(done) {
-            var r = fixtures.readStream('t10.fountain');
+        ["t10", "t11" , "t12", "t13"].forEach(function(item) {
+            it('should process file ' + item + '.fountain', function(done) {
+                var r = fixtures.readStream(item + '.fountain');
 
-            var nd = new notifDescription('t10.notif', function(err, notif) {
-                if (err) return done(err);
-                jouvence.read(r, notif).then(function() {
-                    expect(nd.verify()).to.be.true;
-                    done();
-                }, function(error) {
-                    done(error);
+                var nd = new notifDescription(item + '.notif', function(err, notif) {
+                    if (err) return done(err);
+                    jouvence.read(r, notif).then(function() {
+                        expect(nd.verify()).to.be.true;
+                        done();
+                    }, function(error) {
+                        done(error);
+                    });
+
+
                 });
-
-
             });
         });
     });
