@@ -49,7 +49,7 @@ This command should end with something like this:
 * handle blocks (note and comments in every piece of the screenplay (only actions for now).
 * handle 2 spaces on a line to handle white lines in a dialogue
 * scene number in scene heading
-* bug: we don't notify notes on their own (see t40)
+* add tetsing of blocks inside actions
 
 ## Changelog
 

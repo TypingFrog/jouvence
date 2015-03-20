@@ -42,7 +42,7 @@
       for (var i = 0; i < description.length; i++) {
         var c = description.charAt(i);
 
-        if (c === ':') {
+        if (c === '|') {
           result.push(temp);
           temp = "";
           state += 1;
@@ -96,20 +96,30 @@
           return false;
         }
         var expectedExtraString = items[2] || "{}";
-        var expectedExtra = JSON.parse(expectedExtraString);
+        
+        // if we have a "*" in the descriotion file, that means
+        // we don't want to test the extra value
+        if (expectedExtraString !== "*") {
+          var expectedExtra = JSON.parse(expectedExtraString);
 
-        if (!_.isEqual(extra, expectedExtra)) {
-          console.log("@@ so?:" + _.isEqual({ a : ["1", "2"]},{a : ["1", "2"]}));
-          console.log("@@@ extra:", require('util').inspect(extra, {
-            showHidden: true,
-            depth: null
-          }));
-          console.log("@@@ expectedExtra:", require('util').inspect(expectedExtra, {
-            showHidden: true,
-            depth: null
-          }));
-          this.addError("wrong extra at line:" + this.ixLine + ": (" + JSON.stringify(extra) + ") vs (" + expectedExtraString + ")");
-          return false;
+          if (!_.isEqual(extra, expectedExtra)) {
+            console.log("@@ so?:" + _.isEqual({
+              a: ["1", "2"]
+            }, {
+              a: ["1", "2"]
+            }));
+            console.log("@@@ extra:", require('util').inspect(extra, {
+              showHidden: true,
+              depth: null
+            }));
+            console.log("@@@ expectedExtra:", require('util').inspect(expectedExtra, {
+              showHidden: true,
+              depth: null
+            }));
+            this.addError("wrong extra at line:" + this.ixLine + ": (" + JSON.stringify(extra) + ") vs (" + expectedExtraString + ")");
+            return false;
+          }
+
         }
 
         return true;
@@ -165,13 +175,12 @@
             self.check("synopsis", synopsis);
           },
           block: function(blocks) {
-            self.check("block","",blocks);
+            self.check("block", "", blocks);
           },
           endOfDocument: function() {
             self.check("endOfDocument");
           }
         };
-
       }
     };
 
