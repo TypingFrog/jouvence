@@ -99,8 +99,15 @@
         var expectedExtra = JSON.parse(expectedExtraString);
 
         if (!_.isEqual(extra, expectedExtra)) {
-        console.log("@@@ extra:", require('util').inspect(extra, { showHidden: true, depth: null }));
-        console.log("@@@ expectedExtra:", require('util').inspect(expectedExtra, { showHidden: true, depth: null }));
+          console.log("@@ so?:" + _.isEqual({ a : ["1", "2"]},{a : ["1", "2"]}));
+          console.log("@@@ extra:", require('util').inspect(extra, {
+            showHidden: true,
+            depth: null
+          }));
+          console.log("@@@ expectedExtra:", require('util').inspect(expectedExtra, {
+            showHidden: true,
+            depth: null
+          }));
           this.addError("wrong extra at line:" + this.ixLine + ": (" + JSON.stringify(extra) + ") vs (" + expectedExtraString + ")");
           return false;
         }
@@ -156,6 +163,9 @@
           },
           synopsis: function(synopsis) {
             self.check("synopsis", synopsis);
+          },
+          block: function(blocks) {
+            self.check("block","",blocks);
           },
           endOfDocument: function() {
             self.check("endOfDocument");
