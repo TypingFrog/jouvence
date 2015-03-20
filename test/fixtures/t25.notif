@@ -1,0 +1,7 @@
+startOfDocument
+section_1:Act:{"lineno":1}
+section_2:Sequence:{"lineno":3}
+section_3:Scene:{"lineno":5}
+section_2:Another Sequence:{"lineno":7}
+section_1:Another Act:{"lineno":9}
+endOfDocument
