@@ -14,7 +14,7 @@ var notif = require("../lib").jouvenceNotification;
 
 describe.only('fixtures', function() {
     describe('parsing files', function() {
-        ["t10", "t11" , "t12", "t13" , "t15"].forEach(function(item) {
+        ["t10", "t11" , "t12", "t13" , "t15" , "t20"].forEach(function(item) {
             it('should process file ' + item + '.fountain', function(done) {
                 var r = fixtures.readStream(item + '.fountain');
 
