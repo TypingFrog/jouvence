@@ -122,6 +122,7 @@
           },
           action: function(action, blocks, options) {
             self.check("action", action, options, blocks);
+            //console.log("@@@ blocks:" +  require('util').inspect(blocks, { showHidden: true, depth: null }));
           },
           pageBreak: function() {
             self.check("pageBreak");

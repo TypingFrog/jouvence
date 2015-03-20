@@ -49,7 +49,8 @@ This command should end with something like this:
 * handle blocks (note and comments in every piece of the screenplay (only actions for now).
 * handle 2 spaces on a line to handle white lines in a dialogue
 * scene number in scene heading
+* bug: we don't notify notes on their own (see t40)
 
 ## Changelog
 
-* we creat a dialogueStart/End notification to wrap dialogue elements
+* we create a dialogueStart/End notification to wrap dialogue elements
