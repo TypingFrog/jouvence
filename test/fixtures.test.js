@@ -12,9 +12,9 @@ var jouvence = require("../lib").jouvence;
 var notifDescription = require("./notifDescriptionParser");
 var notif = require("../lib").jouvenceNotification;
 
-describe('fixtures', function() {
+describe.only('fixtures', function() {
     describe('parsing files', function() {
-        ["t10", "t11" , "t12", "t13" , "t15" , "t20" , "t25", "t30", "t40" , "t45"].forEach(function(item) {
+        ["t10", "t11" , "t12", "t13" , "t15" , "t20" , "t25", "t30", "t40" , "t45", "t50"].forEach(function(item) {
             it('should process file ' + item + '.fountain', function(done) {
                 var r = fixtures.readStream(item + '.fountain');
 

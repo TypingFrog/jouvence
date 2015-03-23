@@ -1,0 +1,12 @@
+startOfDocument
+dualDialogueStart
+dialogueStart
+character|BRICK
+dialogue|Screw my retirement.
+dialogueEnd
+dialogueStart
+character|STEEL
+dialogue|Screw your retirement.
+dialogueEnd
+dualDialogueEnd
+endOfDocument
