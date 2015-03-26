@@ -43,7 +43,9 @@
     "t57.fountain": "INT. BASEMENT\n\nThis is the action\n\nBRICK\nScrew my retirement.\n\nSTEEL ^\nScrew your retirement.\n\nANOTHER GUY\nWhatever\n",
     "t57.notif": "startOfDocument\nsceneHeading|INT. BASEMENT|{\"lineno\":1}\naction|This is the action\ndualDialogueStart\ndialogueStart\ncharacter|BRICK\ndialogue|Screw my retirement.\ndialogueEnd\ndialogueStart\ncharacter|STEEL\ndialogue|Screw your retirement.\ndialogueEnd\ndualDialogueEnd\ndialogueStart\ncharacter|ANOTHER GUY\ndialogue|Whatever\ndialogueEnd\nendOfDocument\n",
     "t58.fountain": "INT. BASEMENT\n\nThis is the action\n\nBRICK\nScrew my retirement.\n\nSTEEL ^\nScrew your retirement.\n\nANOTHER GUY\nWhatever\n\nOTHER GUY ^\nAgreed!",
-    "t58.notif": "startOfDocument\nsceneHeading|INT. BASEMENT|{\"lineno\":1}\naction|This is the action\ndualDialogueStart\ndialogueStart\ncharacter|BRICK\ndialogue|Screw my retirement.\ndialogueEnd\ndialogueStart\ncharacter|STEEL\ndialogue|Screw your retirement.\ndialogueEnd\ndualDialogueEnd\ndualDialogueStart\ndialogueStart\ncharacter|ANOTHER GUY\ndialogue|Whatever\ndialogueEnd\ndialogueStart\ncharacter|OTHER GUY\ndialogue|Agreed!\ndialogueEnd\ndualDialogueEnd\nendOfDocument\n"
+    "t58.notif": "startOfDocument\nsceneHeading|INT. BASEMENT|{\"lineno\":1}\naction|This is the action\ndualDialogueStart\ndialogueStart\ncharacter|BRICK\ndialogue|Screw my retirement.\ndialogueEnd\ndialogueStart\ncharacter|STEEL\ndialogue|Screw your retirement.\ndialogueEnd\ndualDialogueEnd\ndualDialogueStart\ndialogueStart\ncharacter|ANOTHER GUY\ndialogue|Whatever\ndialogueEnd\ndialogueStart\ncharacter|OTHER GUY\ndialogue|Agreed!\ndialogueEnd\ndualDialogueEnd\nendOfDocument\n",
+    "t60.fountain": "DEALER\nTen.\nFour.\nDealer gets a seven.\n  \nHit or stand sir?\n\nMONKEY\nDude, I’m a monkey.",
+    "t60.notif": "startOfDocument\ndialogueStart\ncharacter|DEALER\ndialogue|Ten.\ndialogue|Four.\ndialogue|Dealer gets a seven.\ndialogue||\ndialogue|Hit or stand sir?\ndialogueEnd\ndialogueStart\ncharacter|MONKEY\ndialogue|Dude, I’m a monkey.\ndialogueEnd\nendOfDocument\n\n"
 }
     function ReadableString(text, name, opt) {
         Readable.call(this, opt);
