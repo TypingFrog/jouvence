@@ -1,4 +1,4 @@
-# Jouvence (version 0.5)
+# Jouvence (version 0.7)
 
 Javascript library to parse Fountain file. (SAX based evented streaming parser).
 
@@ -41,18 +41,13 @@ This command should end with something like this:
 
 ## TODO
 
-* handle dual dialogues
 * internationalization:
   * words which can start a heading
   * other ending than "TO:" for transitions
 * blank lines between actions are actions?
 * handle blocks (note and comments in every piece of the screenplay (only actions for now).
-* handle 2 spaces on a line to handle white lines in a dialogue
 * scene number in scene heading
 * add testing of blocks inside actions
 * make some notification/callback methods optional
 * make test for BrickAndSteel.fountain file
 
-## Changelog
-
-* we create a dialogueStart/End notification to wrap dialogue elements

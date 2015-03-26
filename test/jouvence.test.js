@@ -1,14 +1,14 @@
 /*global describe, it */
 
 var chai = require('chai');
-var fs = require('fs');
-var path = require('path');
 var sinon = require('sinon');
 var fixtures = require("./fixtures");
 chai.should();
 
-var jouvence = require("../lib").jouvence;
-var notif = require("../lib").jouvenceNotification;
+var jouvence = require("../lib");
+var parser = jouvence.parser();
+var notif = jouvence.dummyNotification();
+var input = jouvence.input();
 
 describe('Jouvence', function() {
     describe('files with no content', function() {
@@ -19,7 +19,7 @@ describe('Jouvence', function() {
             mock.expects("titlePage").never();
             mock.expects("endOfDocument").once();
 
-            jouvence.read(r, notif).then(function() {
+            parser.parse(input.fromReadStream(r), notif).then(function() {
                 mock.verify();
                 done();
             }, function(error) {
@@ -33,7 +33,7 @@ describe('Jouvence', function() {
             mock.expects("titlePage").never();
             mock.expects("endOfDocument").once();
 
-            jouvence.read(r, notif).then(function() {
+            parser.parse(input.fromReadStream(r), notif).then(function() {
                 mock.verify();
                 done();
             }, function(error) {
@@ -64,7 +64,7 @@ describe('Jouvence', function() {
 
             mock.expects("endOfDocument").once();
 
-            jouvence.read(r, notif).then(function() {
+            parser.parse(input.fromReadStream(r), notif).then(function() {
                 mock.verify();
                 done();
             }, function(error) {

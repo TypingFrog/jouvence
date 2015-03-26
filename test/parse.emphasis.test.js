@@ -8,12 +8,13 @@ var should = chai.should();
 var expect = chai.expect;
 var util = require('util');
 
-var parseEmphasis = require("../lib/jouvence/parse.emphasis");
+var EmphasisParser = require("../lib/jouvence/parse.emphasis");
+var em_parser = new EmphasisParser();
 
 describe('parse emphasis', function() {
     describe('simple string parsing', function() {
         it('should parse a regular line (1)', function() {
-            var part = parseEmphasis("allo");
+            var part = em_parser.parse("allo");
             var parts = part.parts;
             expect(parts).to.be.an('array');
             expect(parts.length).to.equal(1);
@@ -22,7 +23,7 @@ describe('parse emphasis', function() {
         });
 
         it('should parse a regular line (2)', function() {
-            var part = parseEmphasis("how are you doing ?");
+            var part = em_parser.parse("how are you doing ?");
             var parts = part.parts;
             expect(parts).to.be.an('array');
             expect(parts.length).to.equal(1);
@@ -31,7 +32,7 @@ describe('parse emphasis', function() {
         });
 
         it('should parse a line with "*"', function() {
-            var part = parseEmphasis("how are *you* doing ?");
+            var part = em_parser.parse("how are *you* doing ?");
 
             expect(part).to.eql({
                 type: '.',
@@ -51,7 +52,7 @@ describe('parse emphasis', function() {
             });
         });
         it('should parse a line with "**"', function() {
-            var part = parseEmphasis("how are **you** doing ?");
+            var part = em_parser.parse("how are **you** doing ?");
 
             expect(part).to.eql({
                 type: '.',
@@ -71,7 +72,7 @@ describe('parse emphasis', function() {
             });
         });
         it('should parse a line with "***"', function() {
-            var part = parseEmphasis("how are ***you*** doing ?");
+            var part = em_parser.parse("how are ***you*** doing ?");
 
             expect(part).to.eql({
                 type: '.',
@@ -91,7 +92,7 @@ describe('parse emphasis', function() {
             });
         });
         it('should parse a line with "_"', function() {
-            var part = parseEmphasis("how are _you_ doing ?");
+            var part = em_parser.parse("how are _you_ doing ?");
 
             expect(part).to.eql({
                 type: '.',
@@ -114,7 +115,7 @@ describe('parse emphasis', function() {
 
     describe("embedded parsing", function() {
         it("should parse emphasis inside emphasis", function() {
-            var part = parseEmphasis("how *are _you_ doing* ?");
+            var part = em_parser.parse("how *are _you_ doing* ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -142,7 +143,7 @@ describe('parse emphasis', function() {
             });
         });
         it("should parse 2 non embedded emphasis", function() {
-            var part = parseEmphasis("how *are* _you_ doing ?");
+            var part = em_parser.parse("how *are* _you_ doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -172,7 +173,7 @@ describe('parse emphasis', function() {
     });
     describe("incomplete emphasis", function() {
         it("should parse non closed emphasis (1)", function() {
-            var part = parseEmphasis("how *are you doing ?");
+            var part = em_parser.parse("how *are you doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -182,7 +183,7 @@ describe('parse emphasis', function() {
             });
         });
         it("should parse non closed emphasis (2)", function() {
-            var part = parseEmphasis("how **are you doing ?");
+            var part = em_parser.parse("how **are you doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -192,7 +193,7 @@ describe('parse emphasis', function() {
             });
         });
         it("should parse non closed emphasis (3)", function() {
-            var part = parseEmphasis("how **are you_ doing ?");
+            var part = em_parser.parse("how **are you_ doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -204,7 +205,7 @@ describe('parse emphasis', function() {
     });
     describe("escaped character", function() {
         it("should process escaped character (1)", function() {
-            var part = parseEmphasis("how \\*are you doing ?");
+            var part = em_parser.parse("how \\*are you doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -215,7 +216,7 @@ describe('parse emphasis', function() {
         });
 
         it("should process escaped character (2)", function() {
-            var part = parseEmphasis("how \\*are* you doing ?");
+            var part = em_parser.parse("how \\*are* you doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -226,7 +227,7 @@ describe('parse emphasis', function() {
         });
 
         it("should process escaped character (3)", function() {
-            var part = parseEmphasis("how *are \\*you* doing ?");
+            var part = em_parser.parse("how *are \\*you* doing ?");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -246,7 +247,7 @@ describe('parse emphasis', function() {
         });
 
         it("should process fountain.io escape example", function() {
-            var part = parseEmphasis("Steel enters the code on the keypad: **\\*9765\\***");
+            var part = em_parser.parse("Steel enters the code on the keypad: **\\*9765\\***");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -265,7 +266,7 @@ describe('parse emphasis', function() {
     
     describe('edge cases', function(){
         it ("'should parse edge cases (1)", function(){
-               var part = parseEmphasis("word1 ***word2* word3");
+               var part = em_parser.parse("word1 ***word2* word3");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -285,7 +286,7 @@ describe('parse emphasis', function() {
         });
         
         it ("'should parse edge cases (2)", function(){
-               var part = parseEmphasis("word1 ***word2** word3");
+               var part = em_parser.parse("word1 ***word2** word3");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
@@ -305,7 +306,7 @@ describe('parse emphasis', function() {
         });
         
         it ("'should parse edge cases (3)", function(){
-               var part = parseEmphasis("word1 *word2** word3");
+               var part = em_parser.parse("word1 *word2** word3");
             expect(part).to.eql({
                 type: '.',
                 parts: [{
