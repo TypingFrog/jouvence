@@ -4,7 +4,7 @@
   "description": "Foutain parser written as a node module (javascript)",
   "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R list -b test/*.test.js"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
