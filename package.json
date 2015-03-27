@@ -30,19 +30,5 @@
     "sinon": "^1.11.1",
     "vinyl-transform": "^1.0.0"
   },
-  "testling": {
-    "files": "test/*.test.js",
-    "harness": "mocha-bdd",
-    "browsers": [
-      "ie/6..latest",
-      "chrome/22..latest",
-      "firefox/16..latest",
-      "safari/latest",
-      "opera/11.0..latest",
-      "iphone/6",
-      "ipad/6",
-      "android-browser/latest"
-    ]
-  },
   "dependencies": {}
 }

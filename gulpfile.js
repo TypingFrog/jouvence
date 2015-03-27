@@ -32,25 +32,9 @@ gulp.task("fixtures", function() {
           }
         }))
         .pipe(gulp.dest("./test"))
-
     });
 
   });
 });
-
-gulp.task('browserify', function() {
-  var browserified = transform(function(filename) {
-    var b = browserify({});
-    b.require(filename,{expose: "jouvence"});
-    // var b = browserify(filename);
-    return b.bundle();
-  });
-  return gulp.src(['lib/index.js'])
-    .pipe(browserified)
-    .pipe(rename('jouvence.js'))
-    .pipe(gulp.dest('./build'));
-});
-
-
 
 gulp.task('default', ['test']);
