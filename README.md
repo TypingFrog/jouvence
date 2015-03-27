@@ -1,5 +1,7 @@
 # Jouvence (version 0.7)
 
+[![Build Status](https://travis-ci.org/TypingFrog/jouvence.svg?branch=dev%2F0.7)](https://travis-ci.org/TypingFrog/jouvence)
+
 Javascript library to parse Fountain file. (SAX based evented streaming parser).
 
 Fountain is a text format, similar to Markdown, but designed specifically
