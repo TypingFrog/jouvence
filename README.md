@@ -98,6 +98,29 @@ action:<A gorgeous day.  The sun is shining.  But BRICK BRADDOCK, retired police
 
 The easiest way to create your own callback class is to copy and paste the code from [this sample notification class](lib/jouvence/jouvence_notification.js) and provide your own implementation.
 
+
+#### Callbacks description
+
+Callback name | Description
+------------- | -------------
+`startOfDocument  | called when the parsing starts
+`titlePage (metainformation)  | called when the [title page information](http://fountain.io/syntax#section-titlepage) is parsed. `metainformation` contains is a map containing all the information from the title page
+`sceneHeading(sceneHeading, extra)` | called when a [scene heading](http://fountain.io/syntax#section-slug) is parsed. `extra.lineno` contains the line number of the input.
+`action(action, blocks, options)` | called when an [action](http://fountain.io/syntax#section-action) is parsed. `blocks` contains the [comments](http://fountain.io/syntax#section-bone) or [notes](http://fountain.io/syntax#section-notes) which may have been inserted in the action
+`pageBreak` | called when a [page break](http://fountain.io/syntax#section-pagebreaks) is parsed
+`dualDialogueStart` | called when a [dual dialogue](http://fountain.io/syntax#section-dual) is about to start
+`dualDialogueEnd` | called when a dual dialogue ends
+`dialogueStart`  | called when a  dialogue is about to start
+`dialogueEnd` | called when a  dialogue ends
+`character(character, option)` | called when a character is parsed. `option.extension` contains the optional extension
+`parenthetical(parenthetical)` | called when a [parenthetical](http://fountain.io/syntax#section-paren) is parsed
+`dialogue(dialogue)` | called when a [dialogue](http://fountain.io/syntax#section-dialogue) is parsed
+`transition(transition)` | called when a [transition](http://fountain.io/syntax#section-trans) is parsed
+`section(section, level, extra)`  (optional) Called when a [section](http://fountain.io/syntax#section-sections) is parsed.
+`synopsis(synopsis)` | (optional) Called when a [synopsis](http://fountain.io/syntax#section-sections) is parsed.
+`block(blocks)` | Called when a [comments](http://fountain.io/syntax#section-bone) or [notes](http://fountain.io/syntax#section-notes) have been parsed
+`endOfDocument` | Called when the end of the input is reached
+
 ### emphasis parser: jouvence.parseEmphasis()
 
 This last class allows you to parse the emphasis in the strings returned in the API parsing events.
