@@ -12,6 +12,10 @@
   },
   "author": "Pierre Carion",
   "license": "BSD",
+  "keywords": [
+    "fountain",
+    "screenplay"
+  ],
   "bugs": {
     "url": "https://github.com/TypingFrog/jouvence/issues"
   },
