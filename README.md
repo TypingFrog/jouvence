@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/TypingFrog/jouvence.svg?branch=master)](https://travis-ci.org/TypingFrog/jouvence)
 
-# Jouvence (version 1.0.0)
+# Jouvence (version 1.0.1)
 
 Jouvence is a javascript library to parse a screenplay written in Fountain.
 
