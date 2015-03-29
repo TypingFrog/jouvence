@@ -50,7 +50,7 @@ parser.parse(input, jouvence.dummyNotification())
 
 ## API details
 
-Once you have imported the jouvence API with `require('jouvence'), you then have access to 3 classes:
+Once you have imported the jouvence API with `require('jouvence')`, you then have access to 3 classes:
 
 ### Input : jouvence.input()
 
