@@ -1,7 +1,7 @@
 {
   "name": "jouvence",
-  "version": "0.1.0",
-  "description": "Foutain parser written as a node module (javascript)",
+  "version": "1.0.0",
+  "description": "Jouvence is a Fountain parser for Javascript.",
   "main": "lib/index.js",
   "scripts": {
     "test": "gulp test"
@@ -19,7 +19,6 @@
   "devDependencies": {
     "browserify": "^8.0.2",
     "chai": "^1.9.2",
-    "es6-promise": "^2.0.1",
     "gulp": "^3.8.9",
     "gulp-fixtures2js": "0.0.1",
     "gulp-mocha": "^1.1.1",
@@ -30,5 +29,7 @@
     "sinon": "^1.11.1",
     "vinyl-transform": "^1.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "es6-promise": "^2.0.1"
+  }
 }
