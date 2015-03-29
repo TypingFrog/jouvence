@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/TypingFrog/jouvence.svg?branch=release%2F1.0)](https://travis-ci.org/TypingFrog/jouvence)
+[![Build Status](https://travis-ci.org/TypingFrog/jouvence.svg?branch=master)](https://travis-ci.org/TypingFrog/jouvence)
 
 # Jouvence (version 1.0.0)
 
