@@ -1,6 +1,6 @@
 {
   "name": "jouvence",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Jouvence is a Fountain parser for Javascript.",
   "main": "lib/index.js",
   "scripts": {
@@ -12,6 +12,10 @@
   },
   "author": "Pierre Carion",
   "license": "BSD",
+  "keywords": [
+    "fountain",
+    "screenplay"
+  ],
   "bugs": {
     "url": "https://github.com/TypingFrog/jouvence/issues"
   },
