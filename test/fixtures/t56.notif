@@ -1,0 +1,16 @@
+startOfDocument
+sceneHeading|INT. BASEMENT|{"lineno":1}
+action|This is the action
+dualDialogueStart
+dialogueStart
+character|BRICK
+dialogue|Screw my retirement.
+dialogueEnd
+dialogueStart
+character|STEEL
+dialogue|Screw your retirement.
+dialogueEnd
+dualDialogueEnd
+sceneHeading|EXT. ELSEWHERE|{"lineno":11}
+action|Whatever
+endOfDocument

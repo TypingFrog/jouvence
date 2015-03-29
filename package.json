@@ -1,10 +1,10 @@
 {
   "name": "jouvence",
-  "version": "0.1.0",
-  "description": "Foutain parser written as a node module (javascript)",
+  "version": "1.0.0",
+  "description": "Jouvence is a Fountain parser for Javascript.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R list -b test/*.test.js"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -19,29 +19,17 @@
   "devDependencies": {
     "browserify": "^8.0.2",
     "chai": "^1.9.2",
-    "es6-promise": "^2.0.1",
     "gulp": "^3.8.9",
     "gulp-fixtures2js": "0.0.1",
     "gulp-mocha": "^1.1.1",
     "gulp-rename": "^1.2.0",
+    "lodash": "^3.5.0",
     "minimist": "^1.1.0",
     "mocha": "^2.0.1",
     "sinon": "^1.11.1",
     "vinyl-transform": "^1.0.0"
   },
-  "testling": {
-    "files": "test/*.test.js",
-    "harness": "mocha-bdd",
-    "browsers": [
-      "ie/6..latest",
-      "chrome/22..latest",
-      "firefox/16..latest",
-      "safari/latest",
-      "opera/11.0..latest",
-      "iphone/6",
-      "ipad/6",
-      "android-browser/latest"
-    ]
-  },
-  "dependencies": {}
+  "dependencies": {
+    "es6-promise": "^2.0.1"
+  }
 }

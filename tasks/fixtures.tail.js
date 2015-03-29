@@ -24,8 +24,8 @@
         readStream: function(name) {
             var text = fixtures[name];
             if (typeof text === 'undefined') {
-                console.log("-- no fixtures with name:" + name);
-                return null;
+                console.log("-- no static fixtures with name:" + name);
+                return fs.createReadStream(path.join(__dirname, 'fixtures',name));
             }
             return new ReadableString(text, name);
         }

@@ -1,0 +1,19 @@
+startOfDocument
+dialogueStart
+character|STEEL
+dialogue|The man's a myth!
+dialogueEnd
+dialogueStart
+character|MOM|{ "extension":"O. S." }
+dialogue|Luke! Come down for supper!
+dialogue|Please!
+dialogueEnd
+dialogueStart
+character|HANS|{ "extension":"on the radio" }
+dialogue|What was it you said?
+dialogueEnd
+dialogueStart
+character|McCLANE
+dialogue|Yippie ki-yay! I got my lower-case C back!
+dialogueEnd
+endOfDocument

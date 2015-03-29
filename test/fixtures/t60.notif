@@ -1,0 +1,15 @@
+startOfDocument
+dialogueStart
+character|DEALER
+dialogue|Ten.
+dialogue|Four.
+dialogue|Dealer gets a seven.
+dialogue||
+dialogue|Hit or stand sir?
+dialogueEnd
+dialogueStart
+character|MONKEY
+dialogue|Dude, I’m a monkey.
+dialogueEnd
+endOfDocument
+
