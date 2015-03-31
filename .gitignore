@@ -32,3 +32,4 @@ node_modules
 
 test/fixtures.js 
 jouvence.sublime-workspace
+.coveralls.yml

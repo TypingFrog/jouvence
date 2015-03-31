@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/TypingFrog/jouvence.svg?branch=master)](https://travis-ci.org/TypingFrog/jouvence)
+[![Coverage Status](https://coveralls.io/repos/TypingFrog/jouvence/badge.svg?branch=master)](https://coveralls.io/r/TypingFrog/jouvence?branch=master)
 
 # Jouvence (version 1.0.1)
 

@@ -5,6 +5,8 @@ var fs = require('fs');
 var browserify = require('browserify');
 var transform = require('vinyl-transform');
 var rename = require('gulp-rename');
+var istanbul = require('gulp-istanbul');
+var coveralls = require('gulp-coveralls');
 
 gulp.task('test', ['fixtures'], function() {
   return gulp.src('test/*.test.js', {
@@ -14,6 +16,23 @@ gulp.task('test', ['fixtures'], function() {
       reporter: 'spec',
       grep: ''
     }));
+});
+
+gulp.task('coverage', ['fixtures'], function (cb) {
+  gulp.src(['lib/**/*.js'])
+    .pipe(istanbul()) // Covering files
+    .pipe(istanbul.hookRequire()) // Force `require` to return covered files
+    .on('finish', function () {
+      gulp.src(['test/*.test.js'])
+        .pipe(mocha())
+        .pipe(istanbul.writeReports()) // Creating the reports after tests runned
+        .on('end', cb);
+    });
+});
+
+gulp.task('coveralls', ['coverage'], function() {
+  gulp.src('./coverage/lcov.info')
+  .pipe(coveralls());
 });
 
 gulp.task("fixtures", function() {
