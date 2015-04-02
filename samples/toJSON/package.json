@@ -1,0 +1,14 @@
+{
+  "name": "toJSON",
+  "version": "1.0.0",
+  "description": "convert Fountain file to JSON",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jouvence": "^1.0.1"
+  }
+}

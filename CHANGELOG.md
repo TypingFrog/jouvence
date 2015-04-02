@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file following [this template](http://keepachangelog.com/).
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.2 
+### Fixed
+- return error if the input can't be read (for instance, the input file doesn't exist)
+
 ## 1.0.1 - 2015-03-29
 ### Changed
 - Update package.json for npm repository: add keywords and add missing dependency (es6-promise).
